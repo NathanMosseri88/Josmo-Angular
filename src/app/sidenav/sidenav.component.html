@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+</mat-toolbar>
+<mat-drawer-container>
+    <mat-sidenav #sidenav class="side-nav-left" position="start" role="directory" [opened]="opened">
+        <div class="backdrop" (click)="toggleSideBar()"></div>
+        <div class="side-nav-content">
+            <h2>Josmo</h2>
+            <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li><a routerLink="/proposal-form" routerLinkActive="active">Proposal Form</a></li>
+        </div>
+    </mat-sidenav>
+</mat-drawer-container>
+  

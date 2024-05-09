@@ -1,0 +1,18 @@
+#header-container {
+    background-color: Black;
+    height: 10%;
+    margin-bottom: 2px;
+}
+
+#header-text {
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0%;
+}
+
+button {
+    margin-top: 1%;
+    margin-left: 1%;
+    padding: 2;
+}
