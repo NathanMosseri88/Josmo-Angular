@@ -3,6 +3,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import  {MatIcon} from '@angular/material/icon'
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { PresetOptionsComponent } from '../preset-options/preset-options.component';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
     MatFormField,
     MatSelect,
     SidenavComponent,
-    MatIcon
+    MatIcon,
+    PresetOptionsComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

@@ -1,18 +1,30 @@
 #header-container {
-    background-color: Black;
-    height: 10%;
+    background-color: black;
+    height: 13%;
     margin-bottom: 2px;
-}
-
-#header-text {
+    position: relative; /* Ensure the container is positioned relative */
+  }
+  
+  #header-text {
     color: white;
     text-align: center;
-    margin: 0;
-    padding: 0%;
-}
-
-button {
-    margin-top: 1%;
-    margin-left: 1%;
-    padding: 2;
-}
+    margin: 0%;
+    padding: 2%;
+  }
+  
+  #nav-button {
+    position: absolute; /* Position the button absolutely */
+    top: 50%;
+    left: 1%; /* Adjust as needed */
+    transform: translateY(-50%);
+    padding: 2px; /* Added unit to padding */
+  }
+  
+  .header-right {
+    position: absolute; /* Position the preset options absolutely */
+    top: 50%;
+    right: 1%; /* Adjust as needed */
+    transform: translateY(-50%);
+    color: white;
+  }
+  

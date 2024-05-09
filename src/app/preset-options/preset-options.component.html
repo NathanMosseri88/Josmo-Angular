@@ -1,0 +1,4 @@
+<mat-label>Saved Presets</mat-label>
+<mat-select id="preset-dropdown" (selectionChange)="handleDropdown($event)">
+    <mat-option *ngFor="let option of presetOptions" value={{option}}>{{option}}</mat-option>
+</mat-select>
