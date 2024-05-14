@@ -26,6 +26,7 @@
     align-items: center;
     border-bottom: 1px dotted black;
     padding: 0.5%;
+    background-color: white;
 }
 
 .form-card-bottom {
@@ -43,7 +44,7 @@
 #submit-button {
     background-color: black;
     color: white;
-    
+    margin: 2.5px;
 }
 
 #submit-button:hover {
@@ -55,6 +56,7 @@
 #cancel-button{
     background-color: black;
     color: white;
+    margin: 2.5px;
 }
 #cancel-button:hover{
     background-color: white;

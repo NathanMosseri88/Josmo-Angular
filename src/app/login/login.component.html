@@ -1,18 +1,17 @@
 <div id="form-container">
-
     <mat-card class="form-card">
-        <form id="login-form">
+        <form [formGroup]="loginFormData" id="login-form">
             <mat-card-header class="form-card-top">
                 <h2>Log In</h2>
             </mat-card-header>
             <mat-card-content class="form-card-content">
                 <mat-form-field>
                     <mat-label>User Name</mat-label>
-                    <input matInput placeholder="User Name" class="form-field">
+                    <input matInput placeholder="User Name" class="form-field" formControlName="username">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="Password" type="password" class="form-field">
+                    <input matInput placeholder="Password" type="password" class="form-field" formControlName="password">
                 </mat-form-field>
                 <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
             </mat-card-content>
