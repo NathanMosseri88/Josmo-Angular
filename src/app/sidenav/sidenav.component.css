@@ -59,3 +59,8 @@ button:hover {
     background-color: white;
     color: black;
 }
+
+.logo {
+    max-width: 90px; /* Adjust size as needed */
+    padding: 5%;
+  }

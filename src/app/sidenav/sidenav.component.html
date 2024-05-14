@@ -4,8 +4,8 @@
     <mat-sidenav #sidenav class="side-nav-left" position="start" role="directory" [opened]="opened">
         <div class="backdrop" (click)="toggleSideBar()"></div>
         <div class="side-nav-content">
+            <img class="logo" src="../../assets/JOSMO_logo_100x75.png">
             <button (click)="toggleSideBar()">x</button>
-            <h2>Josmo</h2>
             <li><a routerLink="/" routerLinkActive="active">Home</a></li>
             <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
             <li><a routerLink="/styles" routerLinkActive="active">Style Selection</a></li>
