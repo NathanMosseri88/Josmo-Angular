@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatInput } from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox'
+import { MatCardModule } from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button'
 
 @Component({
   selector: 'app-proposal-form',
@@ -17,6 +20,9 @@ import { MatInput } from '@angular/material/input';
     MatLabel,
     MatInput,
     ReactiveFormsModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatButtonModule
   ],
   templateUrl: './proposal-form.component.html',
   styleUrl: './proposal-form.component.css'
@@ -33,10 +39,10 @@ export class ProposalFormComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.formData = this.formBuilder.group({
-      type: ['', Validators.required],
+      type: ['', Validators.nullValidator],
       view: ['', Validators.required],
       pC: ['', Validators.required],
-      columns: ['', Validators.required],
+      columns: [[], Validators.required],
       filters: ['', Validators.required],
       status: ['', Validators.required],
       filename: ['', Validators.required],
@@ -50,6 +56,8 @@ export class ProposalFormComponent {
     console.log(this.formData.value)
   }
 
- 
+  handleCancel(){
+    this.formData.reset()
+  }
 
 }

@@ -11,7 +11,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
     MatFormField,
     MatSelect,
     MatOption,
-    MatLabel
+    MatLabel,
   ],
   templateUrl: './preset-options.component.html',
   styleUrl: './preset-options.component.css'

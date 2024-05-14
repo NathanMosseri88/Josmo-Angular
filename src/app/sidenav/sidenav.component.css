@@ -13,14 +13,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 10%;
+    width: 15%;
     height: calc(100% - 60px);
     padding: 30px;
     overflow: auto;
     overflow-y: none;
     box-shadow: 0 2px 14px 0 rgba(130, 130, 130, 0.5);
-    background: #FFF;
-    color: #555555 !important;
+    background: black;
+    color: white !important;
 }
 
 .backdrop {
@@ -32,4 +32,30 @@
 
 .mat-drawer {
     box-shadow: unset !important;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
+
+li {
+    padding-top: 10%;
+    padding-bottom: 5%;
+}
+
+li:hover {
+    font-weight: bold;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-color: white;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
 }

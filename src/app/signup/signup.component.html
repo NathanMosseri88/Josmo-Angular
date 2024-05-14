@@ -1,9 +1,8 @@
 <div id="form-container">
-
     <mat-card class="form-card">
         <form id="login-form">
             <mat-card-header class="form-card-top">
-                <h2>Log In</h2>
+                <h2>Sign Up</h2>
             </mat-card-header>
             <mat-card-content class="form-card-content">
                 <mat-form-field>
@@ -17,7 +16,7 @@
                 <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
             </mat-card-content>
             <mat-card-footer class="form-card-bottom">
-                <p>Don't have an account? <a routerLink="/signup" routerLinkActive="active">Sign Up</a></p>
+                <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Log In</a></p>
             </mat-card-footer>
         </form>
     </mat-card>

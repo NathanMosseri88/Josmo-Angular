@@ -18,6 +18,13 @@
     left: 1%; /* Adjust as needed */
     transform: translateY(-50%);
     padding: 2px; /* Added unit to padding */
+    background-color: black;
+    color: white;
+  }
+
+  #nav-button:hover {
+    background-color: white;
+    color: black;
   }
   
   .header-right {

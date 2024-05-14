@@ -1,55 +1,73 @@
 <div id="form-container">
-    <form [formGroup]="formData" (ngSubmit)="handleSubmit($event)" >
-        <mat-label>Run Type</mat-label>
-        <mat-form-field>
-            <mat-select name="type" #type (selectionChange)="handleStateChange('type', type.value)" formControlName="type">
-                <mat-option *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-card class="form-card">
+        <form [formGroup]="formData" (ngSubmit)="handleSubmit($event)" >
+            <mat-card-header class="form-card-top">
+                <h2>Proposal Form</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field class="form-field">
+                    <mat-label>Run Type</mat-label>
+                    <mat-select name="type" #type (selectionChange)="handleStateChange('type', type.value)" formControlName="type" placeholder="Run Type">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <mat-label for="view">View By</mat-label>
-        <mat-form-field>
-            <mat-select name="view" #view (selectionChange)="handleStateChange('view', view.value)" formControlName="view">
-                <mat-option *ngFor="let view of viewBy" id={{view}} value={{view}}>{{view}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-form-field class="form-field">
+                    <mat-label for="view">View By</mat-label>
+                    <mat-select name="view" #view (selectionChange)="handleStateChange('view', view.value)" formControlName="view" placeholder="View By">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let view of viewBy" id={{view}} value={{view}}>{{view}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <mat-label>Pairs/Cases</mat-label>
-        <mat-form-field>
-            <mat-select name="pC" #pC (selectionChange)="handleStateChange('pC', pC.value)" formControlName="pC">
-                <mat-option *ngFor="let p of pairsCases" value={{p}}>{{p}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-form-field class="form-field">
+                    <mat-label>Pairs/Cases</mat-label>
+                    <mat-select name="pC" #pC (selectionChange)="handleStateChange('pC', pC.value)" formControlName="pC" placeholder="Pairs/Cases">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let p of pairsCases" value={{p}}>{{p}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <mat-label>Include Columns</mat-label>
-        <mat-form-field>
-            <mat-select name="columns" #columns (selectionChange)="handleStateChange('columns', columns.value)" formControlName="columns">
-                <mat-option *ngFor="let c of includeColumns" value={{c}}>{{c}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-form-field class="form-field">
+                    <mat-label>Include Columns</mat-label>
+                    <mat-select multiple name="columns" #columns (selectionChange)="handleStateChange('columns', columns.value)" formControlName="columns" placeholder="Include Columns">
+                        <mat-option *ngFor="let c of includeColumns" value={{c}}>{{c}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <br/>
-  
-        <mat-label>Stock Filters</mat-label>
-        <mat-form-field>
-            <mat-select name="filters" #filter (selectionChange)="handleStateChange('filters', filter.value)" formControlName="filters">
-                <mat-option *ngFor="let f of stockFilters" name="filters" value={{f}}>{{f}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <br/>
+        
+                <mat-form-field class="form-field">
+                    <mat-label>Stock Filters</mat-label>
+                    <mat-select name="filters" #filter (selectionChange)="handleStateChange('filters', filter.value)" formControlName="filters" placeholder="Stock Filters">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let f of stockFilters" name="filters" value={{f}}>{{f}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <mat-label>Status</mat-label>
-        <mat-form-field>
-            <mat-select name="status" #status (selectionChange)="handleStateChange('status', status.value)" formControlName="status">
-                <mat-option *ngFor="let s of statuses" value={{s}}>{{s}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-form-field class="form-field">
+                    <mat-label>Status</mat-label>
+                    <mat-select name="status" #status (selectionChange)="handleStateChange('status', status.value)" formControlName="status" placeholder="Status">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let s of statuses" value={{s}}>{{s}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <mat-label>Save File As:</mat-label>
-        <mat-form-field>
-            <input name="filename" matInput #filename (input)="handleStateChange('filename',filename.value)" formControlName="filename"/>
-        </mat-form-field>
-
-        <input type="submit" (click)="handleSubmit($event); false" />
-    </form>
-    
+            </mat-card-content>
+            <mat-card-footer class="form-card-bottom">
+                <mat-form-field class="form-field filename-field">
+                    <mat-label>Save File As:</mat-label>
+                    <input name="filename" matInput #filename (input)="handleStateChange('filename',filename.value)" formControlName="filename" placeholder="File Name"/>
+                </mat-form-field>
+                <button id="cancel-button" mat-raised-button type="button" (click)="handleCancel()">Cancel</button>
+                <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
+            </mat-card-footer>
+        </form>
+    </mat-card>
+</div>
+<br/>
+<div>
+    <h2>Results:</h2>
+    <p *ngFor="let i of formData.value | keyvalue">{{i.key}}: {{i.value}}</p>
 </div>
