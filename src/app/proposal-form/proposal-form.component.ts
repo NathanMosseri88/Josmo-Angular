@@ -49,7 +49,7 @@ export class ProposalFormComponent {
     });
   }
   handleStateChange(type: string, value: string){
-    console.log(this.formData.value)
+    console.log(this.formData.value[type])
   }
 
   handleSubmit(e:any){
