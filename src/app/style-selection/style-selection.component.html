@@ -1,4 +1,4 @@
-<div id="styles-container">
+<!-- <div id="styles-container">
     <form [formGroup]="styleFormData">
         <table mat-table id="style-table" [dataSource]="rowData">
 
@@ -13,7 +13,29 @@
             <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
         </table>
     </form>
-</div>
+</div> -->
 <!-- <div id="proposal-container">
     <app-proposal-form></app-proposal-form>
 </div> -->
+<!-- table.component.html -->
+<table (paste)="handlePaste($event)">
+    <thead>
+      <tr>
+        <th>Styles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let style of rows; let i = index">
+        <td>
+          <input formControlName="styles" value={{rows[i]}} placeholder="Input Style ID" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button (click)="addRow()">Add Row</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
