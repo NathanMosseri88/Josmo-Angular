@@ -36,7 +36,7 @@ export class ProposalFormComponent {
   includeColumns = ['Price', 'Cost', 'Landed', 'In Stock', 'ATS', 'Incoming', 'Brand', 'Descript', 'Note']
   stockFilters = ['In Stock Only', 'Include 0 Quantities']
   statuses = ['Active']
-  stylesForPreset:any
+  stylesForPreset:any = {name: '', styles: []}
 
   formData: FormGroup
 
@@ -70,9 +70,12 @@ export class ProposalFormComponent {
     this.formData.reset()
   }
 
-  handleStylesInput(value:string){
-    this.stylesForPreset = value.trim().split('\n')
+  handleStylesInput(style:string){
+    this.stylesForPreset.styles = style.trim().split('\n')
     // this.formData.value.styles = value.trim().split('\n')
+  }
+  handlePresetInput(name:string){
+    this.stylesForPreset.name = name.trim()
   }
 
   handleSavePreset(){
