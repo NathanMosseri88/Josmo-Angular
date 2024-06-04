@@ -58,8 +58,8 @@
 }
 
 .form-card-bottom {
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
     border-top: 1px dotted black;
     padding: 5px 16px; 
     position: sticky;
@@ -128,7 +128,7 @@ th, td {
     text-align: center;
 }
 
-table .table-button {
+.table-button {
     width: 50%;
     background-color: white;
     color: black;
@@ -143,4 +143,13 @@ tfoot tr{
     position: sticky;
     bottom: 0;
     
+}
+
+#button-container {
+    width: 100%;
+    padding-bottom: 2%;
+}
+#preset-container{
+    width: 100%;
+    text-align: center;
 }

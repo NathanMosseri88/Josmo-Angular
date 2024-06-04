@@ -119,8 +119,10 @@ export class ProposalFormComponent {
     }
   }
 
-  addRow(): void {
-    this.rows.push('');
+  addRow(amount:number=1): void {
+    for(let i = 0; i < amount; i++){
+      this.rows.push('');
+    }
     console.log(this.rows)
   }
 }
