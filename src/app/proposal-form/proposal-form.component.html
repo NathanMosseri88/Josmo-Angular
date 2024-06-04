@@ -1,36 +1,38 @@
 <div id="form-container">
-    <form [formGroup]="formData" (ngSubmit)="handleSubmit($event)" class="form-flex-container">
-        <!-- <table (paste)="handlePaste($event)">
-            <thead>
-              <tr>
-                <th>Styles</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of rows">
-                <td>
-                  <input #styles formControlName="styles" (change)="handleInput(styles.value)" value={{row}} placeholder="Input Style ID" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <button (click)="addRow(); false">Add Row</button>
-                </td>
-              </tr>
-            </tbody>
-          </table> -->
-          <mat-card class="form-card; styles-card">
+    <form [formGroup]="formData" (ngSubmit)="handleSubmit($event)" (keydown.enter)="$event.preventDefault()" class="form-flex-container">
+        <mat-card class="form-card; styles-card">
             <mat-card-header class="form-card-top">
                 <h2>Styles</h2>
             </mat-card-header>
             <mat-card-content class="card-content">
-                <mat-form-field class="textarea-field">
+                <table>
+                    <!-- <thead>
+                        <tr>
+                        </tr>
+                    </thead> -->
+                    <tbody class="table-body">
+                        <tr *ngFor="let row of rows; let i = index">
+                            <td>
+                                <input class="table-input" #styles value={{row}} placeholder="Input Style ID" (change)="handleStylesInput(styles.value, i)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-footer">
+                        <tr>
+                            <td>
+                                <button class="table-button" mat-raised-button (click)="addRow(); false">Add Row</button>
+                                <button class="table-button" mat-raised-button (click)="handlePaste(); false">Paste</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                  </table>
+                <!-- <mat-form-field class="textarea-field">
                     <textarea id="styles-input" matInput formControlName="styles" placeholder="Enter Styles" #style (input)="handleStylesInput(style.value)"></textarea>
-                </mat-form-field>
+                </mat-form-field> -->
             </mat-card-content>
             <mat-card-footer class="form-card-bottom">
-                <input matInput #presetName placeholder="Save Preset As..." (input)="handlePresetInput(presetName.value)"/>
-                <button id="style-preset-button" (click)="handleSavePreset(); false">Save Styles Preset</button>
+                <input matInput #presetName placeholder="Save Preset As..." (input)="handlePresetInput(presetName.value)" value="{{stylesForPreset.name}}"/>
+                <button  id="style-preset-button" (click)="handleSavePreset(); false">Save Styles Preset</button>
             </mat-card-footer>
           </mat-card>
         <mat-card class="form-card">
@@ -93,14 +95,9 @@
                     <mat-label>Save File As:</mat-label>
                     <input name="filename" matInput #filename (input)="handleStateChange('filename',filename.value)" formControlName="filename" placeholder="File Name"/>
                 </mat-form-field>
-                <button id="cancel-button" mat-raised-button type="button" (click)="handleCancel()">Cancel</button>
+                <button id="cancel-button" mat-raised-button type="button" (click)="handleCancel()">Clear</button>
                 <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
             </mat-card-footer>
         </mat-card>
     </form>
-</div>
-<br/>
-<div>
-    <h2>Results:</h2>
-    <p *ngFor="let i of formData.value | keyvalue">{{i.key}}: {{i.value}}</p>
 </div>

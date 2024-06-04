@@ -5,6 +5,8 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +19,10 @@ import { CommonModule } from '@angular/common';
     MatSidenavModule,
     HeaderComponent,
     LoginComponent,
-    SidenavComponent
+    SidenavComponent,
+    HttpClientModule
   ],
+  providers: [ApiService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -8,7 +8,8 @@ import { MatInput } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'
-import { StyleSelectionComponent } from '../style-selection/style-selection.component';
+import { ApiService } from '../services/api.service';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-proposal-form',
@@ -24,7 +25,7 @@ import { StyleSelectionComponent } from '../style-selection/style-selection.comp
     MatCheckboxModule,
     MatCardModule,
     MatButtonModule,
-    StyleSelectionComponent,
+    MatTableModule
   ],
   templateUrl: './proposal-form.component.html',
   styleUrl: './proposal-form.component.css'
@@ -40,7 +41,7 @@ export class ProposalFormComponent {
 
   formData: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.formData = this.formBuilder.group({
       type: ['', Validators.nullValidator],
       view: ['', Validators.required],
@@ -57,50 +58,69 @@ export class ProposalFormComponent {
   }
 
   handleSubmit(e:any){
-    this.formData.value.styles = this.formData.value.styles.trim().split('\n')
+    // this.formData.value.styles.length > 0 || !this.formData.value.styles ? 
+    // this.formData.value.styles = this.formData.value.styles.trim().split('\n') : 
+    // alert('Styles input is required')
+    this.rows.length > 0 ? this.formData.value.styles = this.rows : alert('Styles input is required')
     console.log(this.formData.value)
-    // let cleanedRows = this.rows.filter((row) => {
-    //   return row !== ''
-    // })
-    // this.formData.value.styles = cleanedRows
-    // console.log(this.rows)
+    this.apiService.sendProposalForm(this.formData.value).subscribe(
+      res => {
+        console.log(res)
+        this.formData.reset()
+      },
+      error => {
+        console.log(error)
+        console.log(this.formData.value)
+      }
+    )
   }
 
   handleCancel(){
     this.formData.reset()
+    this.rows = []
+    this.stylesForPreset.name = ''
   }
 
-  handleStylesInput(style:string){
-    this.stylesForPreset.styles = style.trim().split('\n')
-    // this.formData.value.styles = value.trim().split('\n')
+  handleStylesInput(style:string, index:number){
+    // this.stylesForPreset.styles = style.trim().split('\n')
+    
+    this.rows[index] = style
+    console.log(style)
   }
+
   handlePresetInput(name:string){
     this.stylesForPreset.name = name.trim()
   }
 
   handleSavePreset(){
-    // console.log(this.formData.value.styles)
+    this.stylesForPreset.styles = this.rows
     console.log(this.stylesForPreset)
+    
+    this.apiService.savePreset(this.stylesForPreset).subscribe(
+      res => {
+        console.log(res)
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
-  // rows: string[] = [''];
+  rows: string[] = [];
 
-  // handlePaste(event: ClipboardEvent): void {
-  //   if (!event.clipboardData){
-  //     return;
-  //   }
-  //   const clipboardData = event.clipboardData;
-  //   const pastedText = clipboardData.getData('text');
-  //   const pastedRows = pastedText.split('\n');
+  async handlePaste() {
+    try {
+      const text = await navigator.clipboard.readText()
+      text.split('\n').forEach(line => line !== '' ? this.rows.push(line.trim()) : null)
+      console.log(text)
+      console.log(this.rows)
+    } catch (error){
+      console.log(error)
+    }
+  }
 
-  //   // this.rows = pastedRows.map(row => row.trim());
-  //   pastedRows.forEach((row) => {
-  //     this.rows.push(row.trim())
-  //   })
-  // }
-
-  // addRow(): void {
-  //   this.rows.push('');
-  //   console.log(this.rows)
-  // }
+  addRow(): void {
+    this.rows.push('');
+    console.log(this.rows)
+  }
 }
