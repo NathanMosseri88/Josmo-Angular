@@ -19,22 +19,6 @@
     width: 40%; /* Adjusted width */
 }
 
-.textarea-field {
-    width: 100%; 
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column; 
-}
-
-.textarea-field textarea {
-    padding: 0%;
-    resize: none;
-    height: 100%;
-    min-height: 330px;
-    box-sizing: border-box;
-    flex-grow: 1;
-}
-
 .form-card {
     width: 60%; /* Adjusted width */
     border: 2px outset black;
@@ -45,6 +29,8 @@
 
 .form-field {
     padding: 2%;
+    margin-left: 2%;
+    width: 27%;
 }
 
 .form-card-top {

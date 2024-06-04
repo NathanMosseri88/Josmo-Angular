@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'
 import { ApiService } from '../services/api.service';
 import { MatTableModule } from '@angular/material/table';
+import { PresetOptionsComponent } from '../preset-options/preset-options.component';
 
 @Component({
   selector: 'app-proposal-form',
@@ -25,7 +26,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCheckboxModule,
     MatCardModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    PresetOptionsComponent
   ],
   templateUrl: './proposal-form.component.html',
   styleUrl: './proposal-form.component.css'
@@ -50,7 +52,9 @@ export class ProposalFormComponent {
       filters: ['', Validators.required],
       status: ['', Validators.required],
       filename: ['', Validators.required],
-      styles: [[], Validators.required]
+      styles: [[], Validators.required],
+      quantityLess: [null, Validators.nullValidator],
+      quantityGreater: [null, Validators.nullValidator],
     });
   }
   handleStateChange(type: string, value: string){
@@ -58,9 +62,6 @@ export class ProposalFormComponent {
   }
 
   handleSubmit(e:any){
-    // this.formData.value.styles.length > 0 || !this.formData.value.styles ? 
-    // this.formData.value.styles = this.formData.value.styles.trim().split('\n') : 
-    // alert('Styles input is required')
     this.rows.length > 0 ? this.formData.value.styles = this.rows : alert('Styles input is required')
     console.log(this.formData.value)
     this.apiService.sendProposalForm(this.formData.value).subscribe(
@@ -81,9 +82,7 @@ export class ProposalFormComponent {
     this.stylesForPreset.name = ''
   }
 
-  handleStylesInput(style:string, index:number){
-    // this.stylesForPreset.styles = style.trim().split('\n')
-    
+  handleStylesInput(style:string, index:number){    
     this.rows[index] = style
     console.log(style)
   }
@@ -110,6 +109,9 @@ export class ProposalFormComponent {
 
   async handlePaste() {
     try {
+      this.rows = this.rows.filter((row) => {
+        return row !== ''
+      },[])
       const text = await navigator.clipboard.readText()
       text.split('\n').forEach(line => line !== '' ? this.rows.push(line.trim()) : null)
       console.log(text)

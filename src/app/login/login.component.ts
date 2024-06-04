@@ -7,6 +7,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
 
   loginFormData: FormGroup
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.loginFormData = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -38,6 +39,14 @@ export class LoginComponent {
 
   handleSubmit(e:any){
     console.log(this.loginFormData.value)
-    this.loginFormData.reset()
+    this.apiService.login(this.loginFormData.value).subscribe(
+      res => {
+        console.log(res)
+        this.loginFormData.reset()
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 }

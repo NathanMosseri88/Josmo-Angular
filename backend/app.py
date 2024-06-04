@@ -11,11 +11,20 @@ CORS(app)
 # app.config['MYSQL_DB'] = 'josmo'
 # mysql = MySQL(app)
 
-@app.route('/api/presets', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
+def login(): 
+    login_data = request.get_json()
+    print(login_data)
+    return login_data
+
+@app.route('/api/presets', methods=['GET', 'POST'])
 def create_preset():
-    preset_data = request.get_json()
-    print(preset_data)
-    return preset_data
+    if request.method == 'GET':
+        return ['ex1 - from API', 'ex2', 'ex3']
+    elif request.method == 'POST':
+        preset_data = request.get_json()
+        print(preset_data)
+        return preset_data
 
 @app.route('/api/proposals', methods=['POST'])
 def createProposal(): 
