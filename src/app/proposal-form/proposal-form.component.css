@@ -12,8 +12,8 @@
 
 .styles-card {
     border: 2px outset black;
-    max-height: 55vh; /* Limit card height */
-    min-height: 55vh;
+    max-height: 68vh; /* Limit card height */
+    min-height: 68vh;
     overflow: auto; /* Enable card scrolling */
     box-shadow: 0px 0px 5vh rgba(0, 0, 0, 0.5);
     width: 40%; /* Adjusted width */

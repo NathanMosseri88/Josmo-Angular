@@ -2,6 +2,6 @@
     <mat-label class="small-input">Saved Presets</mat-label>
     <mat-select id="preset-dropdown" (selectionChange)="handleDropdown($event)"  class="small-input" (opened)="populatePresets()">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let option of presetOptions" value={{option}}>{{option}}</mat-option>
+        <mat-option *ngFor="let option of presetOptions" value={{option.styles}}>{{option.name}}</mat-option>
     </mat-select>
 </mat-form-field>

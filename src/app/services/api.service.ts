@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://127.0.0.1:5000/api'
+  private apiUrl = 'http://localhost:5000/api'
 
   constructor(private http: HttpClient) { }
 
@@ -26,4 +26,5 @@ export class ApiService {
   sendProposalForm(data:any):Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/proposals`, data)
   }
+   
 }

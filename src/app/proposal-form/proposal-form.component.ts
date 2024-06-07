@@ -127,4 +127,11 @@ export class ProposalFormComponent {
     }
     console.log(this.rows)
   }
+
+  handlePresetSelection(selectedStyles: string[]){
+    console.log(selectedStyles)
+    selectedStyles.forEach(style => {
+      this.rows.push(style)
+    })
+  }
 }

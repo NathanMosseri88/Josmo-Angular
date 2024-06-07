@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ApiService } from '../services/api.service';
@@ -18,7 +18,9 @@ import { ApiService } from '../services/api.service';
   styleUrl: './preset-options.component.css'
 })
 export class PresetOptionsComponent {
-  presetOptions = []
+  presetOptions:any[] = []
+
+  @Output() presetSelected = new EventEmitter<string[]>()
 
   constructor(private apiService: ApiService){}
 
@@ -35,7 +37,9 @@ export class PresetOptionsComponent {
   }
 
   handleDropdown(e: any) {
-    console.log(e.value)
+    // console.log(e.value.split(','))
+    this.presetSelected.emit(e.value.split(','))
+    console.log(this.presetSelected)
   }
 
 }

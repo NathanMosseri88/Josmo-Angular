@@ -24,6 +24,7 @@
                 <div id="preset-container">
                     <input matInput #presetName placeholder="Save Preset As..." (input)="handlePresetInput(presetName.value)" value="{{stylesForPreset.name}}"/>
                     <button  id="style-preset-button" (click)="handleSavePreset(); false">Save Styles Preset</button>
+                    <app-preset-options (presetSelected)="handlePresetSelection($event)"></app-preset-options>
                 </div>
                 <!-- <app-preset-options></app-preset-options> -->
             </mat-card-footer>
