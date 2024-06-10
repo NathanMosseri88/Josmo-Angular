@@ -3,6 +3,7 @@ from flask_cors import CORS
 from .models import db
 from .routes import presets_bp, users_bp, proposals_bp
 from flask_migrate import Migrate
+from flask_jwt_extended import JWTManager
 
 def create_app():
     app = Flask(__name__)
@@ -10,10 +11,12 @@ def create_app():
     # Configure database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_database.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['JWT_SECRET_KEY'] = 'f5bdd9ca0349ad5fc9601f228d97777d8104c38f0025ba6de590e21b0c6e0166'
 
     # Initialize database
     db.init_app(app)
     migrate = Migrate(app, db)
+    jwt = JWTManager(app)
 
     # create database tables
     with app.app_context():

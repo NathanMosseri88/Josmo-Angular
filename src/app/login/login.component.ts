@@ -42,10 +42,12 @@ export class LoginComponent {
     this.apiService.login(this.loginFormData.value).subscribe(
       res => {
         console.log(res)
+        sessionStorage.setItem('user', res.access_token)
         this.loginFormData.reset()
       },
       error => {
         console.log(error)
+        alert(error.error.error)
       }
     )
   }
