@@ -4,6 +4,7 @@ import { MatSelect } from '@angular/material/select';
 import  {MatIcon} from '@angular/material/icon'
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { PresetOptionsComponent } from '../preset-options/preset-options.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,11 +19,21 @@ import { PresetOptionsComponent } from '../preset-options/preset-options.compone
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
+
 export class HeaderComponent {
+
+  constructor(private router: Router) {}
+
   @ViewChild(SidenavComponent) sidenav!: SidenavComponent
   
   onToggleSidebar(){
     this.sidenav.toggleSideBar()
   }
+
+  handleLogout(){
+    localStorage.removeItem('user')
+    this.router.navigate(['/login'])
+  }
+
 }
 

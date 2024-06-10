@@ -1,9 +1,11 @@
 from flask import Blueprint, request, jsonify
 from ..models import Proposal, db
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 proposals_bp = Blueprint('proposals', __name__)
 
 @proposals_bp.route('/proposals', methods=['POST'])
+@jwt_required()
 def createProposal(): 
     try:
         proposal_data = request.get_json()
@@ -17,7 +19,7 @@ def createProposal():
             run_type=proposal_data['type'],
             view_by=proposal_data['view'],
             pairs_cases=proposal_data['pairs_cases'],
-            stock_filters =proposal_data['filters'],
+            stock_filters=proposal_data['filters'],
             status=proposal_data['status'],
             file_name=proposal_data['filename']
         )

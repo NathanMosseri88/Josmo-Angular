@@ -25,7 +25,13 @@ export class PresetOptionsComponent {
   constructor(private apiService: ApiService){}
 
   populatePresets(){
-    this.apiService.getPresets().subscribe(
+    let token = localStorage.getItem('user')
+    if(!token){
+      
+      alert('Please log in to view presets')
+      return
+    }
+    this.apiService.getPresets(token).subscribe(
       res => {
         console.log(res)
         this.presetOptions = res

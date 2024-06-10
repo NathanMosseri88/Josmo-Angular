@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models import db, Preset
 
 presets_bp = Blueprint('presets', __name__)
 
 
 @presets_bp.route('/presets', methods=['GET'])
+@jwt_required()
 def get_presets():
     presets = Preset.query.all()
     results = [{"id": preset.id, "name": preset.name, "styles": preset.get_styles()} for preset in presets]
@@ -12,9 +14,13 @@ def get_presets():
    
     
 @presets_bp.route('/presets', methods=['POST'])
+@jwt_required()
 def create_preset():
     try:
+        current_user = get_jwt_identity()
+        print(current_user)
         preset_data = request.get_json()
+        print(preset_data)
         name = preset_data.get('name')
         styles = preset_data.get('styles')
         if not name:

@@ -3,7 +3,7 @@ import {MatSelectModule} from '@angular/material/select'
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card'
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ import { ApiService } from '../services/api.service';
     RouterLink,
     RouterLinkActive,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -30,7 +30,7 @@ import { ApiService } from '../services/api.service';
 export class LoginComponent {
 
   loginFormData: FormGroup
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {
     this.loginFormData = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -42,8 +42,9 @@ export class LoginComponent {
     this.apiService.login(this.loginFormData.value).subscribe(
       res => {
         console.log(res)
-        sessionStorage.setItem('user', res.access_token)
+        localStorage.setItem('user', res.access_token)
         this.loginFormData.reset()
+        this.router.navigate(['/proposal-form'])
       },
       error => {
         console.log(error)

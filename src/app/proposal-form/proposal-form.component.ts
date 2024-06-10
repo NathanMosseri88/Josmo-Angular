@@ -64,7 +64,12 @@ export class ProposalFormComponent {
   handleSubmit(e:any){
     this.formData.value.styles = this.rows 
     console.log(this.formData.value)
-    this.apiService.sendProposalForm(this.formData.value).subscribe(
+    let token = localStorage.getItem('user')
+    if(!token){
+      alert('Please log in to submit proposals')
+      return
+    }
+    this.apiService.sendProposalForm(this.formData.value, token).subscribe(
       res => {
         console.log(res)
         this.formData.reset()
@@ -95,8 +100,12 @@ export class ProposalFormComponent {
   handleSavePreset(){
     this.stylesForPreset.styles = this.rows
     console.log(this.stylesForPreset)
-    
-    this.apiService.savePreset(this.stylesForPreset).subscribe(
+    let token = localStorage.getItem('user')
+    if(!token){
+      alert('Please log in to save presets')
+      return
+    }
+    this.apiService.savePreset(this.stylesForPreset, token).subscribe(
       res => {
         console.log(res)
         alert(`Styles preset "${this.stylesForPreset.name}" saved!`)
