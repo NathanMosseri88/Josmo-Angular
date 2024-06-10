@@ -42,7 +42,7 @@ export class LoginComponent {
     this.apiService.login(this.loginFormData.value).subscribe(
       res => {
         console.log(res)
-        localStorage.setItem('user', res.access_token)
+        sessionStorage.setItem('user', res.access_token)
         this.loginFormData.reset()
         this.router.navigate(['/proposal-form'])
       },

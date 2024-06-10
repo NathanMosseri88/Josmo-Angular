@@ -3,14 +3,14 @@ import json
 
 class Proposal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    run_type = db.Column(db.String, nullable=True)
-    view_by = db.Column(db.String, nullable=True)
-    pairs_cases = db.Column(db.String, nullable=True)
+    run_type = db.Column(db.String(100), nullable=True)
+    view_by = db.Column(db.String(100), nullable=True)
+    pairs_cases = db.Column(db.String(100), nullable=True)
     include_columns = db.Column(db.Text, nullable=True)
-    stock_filters = db.Column(db.String, nullable=True)
-    status = db.Column(db.String, nullable=True)
-    file_name = db.Column(db.String, nullable=True)
-    styles = db.Column(db.String, nullable=False)
+    stock_filters = db.Column(db.String(100), nullable=True)
+    status = db.Column(db.String(100), nullable=True)
+    file_name = db.Column(db.String(100), nullable=True)
+    styles = db.Column(db.String(100), nullable=False)
 
     def set_styles(self, styles):
         self.styles = json.dumps(styles)

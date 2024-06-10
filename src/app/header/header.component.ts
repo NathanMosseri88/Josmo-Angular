@@ -31,7 +31,7 @@ export class HeaderComponent {
   }
 
   handleLogout(){
-    localStorage.removeItem('user')
+    sessionStorage.removeItem('user')
     this.router.navigate(['/login'])
   }
 

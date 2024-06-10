@@ -25,9 +25,8 @@ export class PresetOptionsComponent {
   constructor(private apiService: ApiService){}
 
   populatePresets(){
-    let token = localStorage.getItem('user')
+    let token = sessionStorage.getItem('user')
     if(!token){
-      
       alert('Please log in to view presets')
       return
     }

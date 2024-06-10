@@ -64,7 +64,7 @@ export class ProposalFormComponent {
   handleSubmit(e:any){
     this.formData.value.styles = this.rows 
     console.log(this.formData.value)
-    let token = localStorage.getItem('user')
+    let token = sessionStorage.getItem('user')
     if(!token){
       alert('Please log in to submit proposals')
       return
