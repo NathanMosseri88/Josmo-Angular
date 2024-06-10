@@ -43,11 +43,14 @@ export class ProposalFormComponent {
 
   formData: FormGroup
 
+  presetRows: string[] = []
+  rows: string[] = [];
+
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.formData = this.formBuilder.group({
       type: ['', Validators.nullValidator],
       view: ['', Validators.required],
-      pC: ['', Validators.required],
+      pairs_cases: ['', Validators.required],
       columns: [[], Validators.required],
       filters: ['', Validators.required],
       status: ['', Validators.required],
@@ -57,12 +60,9 @@ export class ProposalFormComponent {
       quantityGreater: [null, Validators.nullValidator],
     });
   }
-  handleStateChange(type: string, value: string){
-    console.log(this.formData.value[type])
-  }
 
   handleSubmit(e:any){
-    this.rows.length > 0 ? this.formData.value.styles = this.rows : alert('Styles input is required')
+    this.formData.value.styles = this.rows 
     console.log(this.formData.value)
     this.apiService.sendProposalForm(this.formData.value).subscribe(
       res => {
@@ -72,6 +72,7 @@ export class ProposalFormComponent {
       error => {
         console.log(error)
         console.log(this.formData.value)
+        alert(error.error.error)
       }
     )
   }
@@ -98,15 +99,16 @@ export class ProposalFormComponent {
     this.apiService.savePreset(this.stylesForPreset).subscribe(
       res => {
         console.log(res)
+        alert(`Styles preset "${this.stylesForPreset.name}" saved!`)
       },
       error => {
-        console.log(error)
+        console.log(error.error.error)
+        alert(error.error.error)
       }
     )
   }
 
-  rows: string[] = [];
-
+ 
   async handlePaste() {
     try {
       this.rows = this.rows.filter((row) => {
@@ -121,7 +123,7 @@ export class ProposalFormComponent {
     }
   }
 
-  addRow(amount:number=1): void {
+  addRow(amount:number=1){
     for(let i = 0; i < amount; i++){
       this.rows.push('');
     }
@@ -130,8 +132,9 @@ export class ProposalFormComponent {
 
   handlePresetSelection(selectedStyles: string[]){
     console.log(selectedStyles)
-    selectedStyles.forEach(style => {
-      this.rows.push(style)
-    })
+    this.rows.push(...selectedStyles)
+    console.log(this.rows)
   }
+
+
 }

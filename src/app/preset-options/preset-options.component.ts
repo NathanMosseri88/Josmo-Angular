@@ -39,7 +39,7 @@ export class PresetOptionsComponent {
   handleDropdown(e: any) {
     // console.log(e.value.split(','))
     this.presetSelected.emit(e.value.split(','))
-    console.log(this.presetSelected)
+    // console.log(this.presetSelected)
   }
 
 }

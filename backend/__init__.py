@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from .models import db
 from .routes import presets_bp, users_bp, proposals_bp
+from flask_migrate import Migrate
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +13,7 @@ def create_app():
 
     # Initialize database
     db.init_app(app)
+    migrate = Migrate(app, db)
 
     # create database tables
     with app.app_context():
