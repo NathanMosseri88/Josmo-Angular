@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from .models import db
+from .models import db, User, Preset, Proposal
 from .routes import presets_bp, users_bp, proposals_bp
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
@@ -28,5 +28,9 @@ def create_app():
     app.register_blueprint(proposals_bp, url_prefix='/api')
 
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
+
+    @app.shell_context_processor
+    def make_shell_context():
+        return {'db': db, 'User': User, 'Preset': Preset, 'Proposal': Proposal}
 
     return app

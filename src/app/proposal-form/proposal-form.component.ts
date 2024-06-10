@@ -100,7 +100,7 @@ export class ProposalFormComponent {
   handleSavePreset(){
     this.stylesForPreset.styles = this.rows
     console.log(this.stylesForPreset)
-    let token = localStorage.getItem('user')
+    let token = sessionStorage.getItem('user')
     if(!token){
       alert('Please log in to save presets')
       return

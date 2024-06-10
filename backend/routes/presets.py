@@ -28,7 +28,7 @@ def create_preset():
         if not styles:
             return jsonify({'error': 'Styles can not be empty'}), 400
         
-        new_preset = Preset(name=name)
+        new_preset = Preset(name=name, user_id=current_user)
         new_preset.set_styles(styles)
         db.session.add(new_preset)
         db.session.commit()
