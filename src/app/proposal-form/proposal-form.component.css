@@ -67,9 +67,13 @@
 }
 
 #submit-button:hover,
-#cancel-button:hover,
 #style-preset-button:hover {
     box-shadow: 0px 0px 5vh green;
+    cursor: pointer;
+}
+
+#cancel-button:hover {
+    box-shadow: 0px 0px 5vh red;
 }
 
 .card-content {

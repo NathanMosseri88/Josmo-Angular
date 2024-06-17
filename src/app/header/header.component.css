@@ -31,4 +31,15 @@
     margin-left: auto; /* Push to the right */
     margin-top: 2%;
   }
+
+  #logout-button {
+    background-color: black;
+    color: white;
+  }
+
+  #logout-button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
   

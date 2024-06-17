@@ -38,7 +38,6 @@ export class LoginComponent {
   }
 
   handleSubmit(e:any){
-    console.log(this.loginFormData.value)
     this.apiService.login(this.loginFormData.value).subscribe(
       res => {
         console.log(res)

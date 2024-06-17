@@ -34,7 +34,6 @@ export class SignupComponent {
   }
   
   handleSubmit(e:any){
-    console.log(this.signupFormData.value)
     this.signupFormData.reset()
   }
 }

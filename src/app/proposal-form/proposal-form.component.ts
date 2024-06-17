@@ -66,7 +66,7 @@ export class ProposalFormComponent {
 
   handleSubmit(e:any){
     this.formData.value.styles = this.rows 
-    console.log(this.formData.value)
+
     let token = sessionStorage.getItem('user')
     if(!token){
       alert('Please log in to submit proposals')
@@ -79,7 +79,6 @@ export class ProposalFormComponent {
       },
       error => {
         console.log(error)
-        console.log(this.formData.value)
         alert(error.error.error)
       }
     )
@@ -93,7 +92,6 @@ export class ProposalFormComponent {
 
   handleStylesInput(style:string, index:number){    
     this.rows[index] = style
-    console.log(style)
   }
 
   handlePresetInput(name:string){
@@ -102,7 +100,7 @@ export class ProposalFormComponent {
 
   handleSavePreset(){
     this.stylesForPreset.styles = this.rows
-    console.log(this.stylesForPreset)
+
     let token = sessionStorage.getItem('user')
     if(!token){
       alert('Please log in to save presets')
@@ -129,8 +127,6 @@ export class ProposalFormComponent {
       },[])
       const text = await navigator.clipboard.readText()
       text.split('\n').forEach(line => line !== '' ? this.rows.push(line.trim()) : null)
-      console.log(text)
-      console.log(this.rows)
     } catch (error){
       console.log(error)
     }
@@ -140,13 +136,10 @@ export class ProposalFormComponent {
     for(let i = 0; i < amount; i++){
       this.rows.push('');
     }
-    console.log(this.rows)
   }
 
   handlePresetSelection(selectedStyles: string[]){
-    console.log(selectedStyles)
     this.rows.push(...selectedStyles)
-    console.log(this.rows)
   }
 
 
