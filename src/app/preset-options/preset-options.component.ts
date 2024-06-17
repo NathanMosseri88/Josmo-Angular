@@ -19,6 +19,7 @@ import { ApiService } from '../services/api.service';
 })
 export class PresetOptionsComponent {
   presetOptions:any[] = []
+  presetsLoaded= false
 
   @Output() presetSelected = new EventEmitter<string[]>()
 
@@ -30,10 +31,14 @@ export class PresetOptionsComponent {
       alert('Please log in to view presets')
       return
     }
+    if(this.presetsLoaded){
+      return
+    }
     this.apiService.getPresets(token).subscribe(
       res => {
         console.log(res)
         this.presetOptions = res
+        this.presetsLoaded = true
       }, 
       error => {
         console.log(error)
@@ -42,9 +47,14 @@ export class PresetOptionsComponent {
   }
 
   handleDropdown(e: any) {
-    // console.log(e.value.split(','))
-    this.presetSelected.emit(e.value.split(','))
-    // console.log(this.presetSelected)
+    if(e.value){
+      this.presetSelected.emit(e.value.split(','))
+    }
+  }
+
+  refreshPresets(){
+    this.presetsLoaded = false
+    this.populatePresets()
   }
 
 }

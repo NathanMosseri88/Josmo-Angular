@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
@@ -33,6 +33,9 @@ import { PresetOptionsComponent } from '../preset-options/preset-options.compone
   styleUrl: './proposal-form.component.css'
 })
 export class ProposalFormComponent {
+
+  @ViewChild(PresetOptionsComponent) presetOptionsComponent!: PresetOptionsComponent
+
   runTypes = ['Size Run']
   viewBy = ['UPC', 'Size']
   pairsCases = ['Pairs', 'Cases']
@@ -109,6 +112,7 @@ export class ProposalFormComponent {
       res => {
         console.log(res)
         alert(`Styles preset "${this.stylesForPreset.name}" saved!`)
+        this.presetOptionsComponent.refreshPresets()
       },
       error => {
         console.log(error.error.error)
