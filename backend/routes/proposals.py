@@ -21,10 +21,10 @@ def createProposal():
             pairs_cases=proposal_data['pairs_cases'],
             stock_filters=proposal_data['filters'],
             status=proposal_data['status'],
-            file_name=proposal_data['filename']
+            file_name=proposal_data['filename'],
+            include_columns=include_columns,
+            styles=styles
         )
-        new_proposal.set_styles(styles)
-        new_proposal.set_include_columns(include_columns)
         db.session.add(new_proposal)
         db.session.commit()
         return jsonify(new_proposal.serizalize), 200

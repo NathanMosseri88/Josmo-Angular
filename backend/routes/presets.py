@@ -10,7 +10,7 @@ presets_bp = Blueprint('presets', __name__)
 def get_presets():
     current_user = get_jwt_identity()
     presets = Preset.query.filter_by(user_id=current_user).all()
-    results = [{"id": preset.id, "name": preset.name, "styles": preset.get_styles()} for preset in presets]
+    results = [{"id": preset.id, "name": preset.name, "styles": preset.styles} for preset in presets]
     return jsonify(results), 200
    
     
@@ -29,11 +29,10 @@ def create_preset():
         if not styles:
             return jsonify({'error': 'Styles can not be empty'}), 400
         
-        new_preset = Preset(name=name, user_id=current_user)
-        new_preset.set_styles(styles)
+        new_preset = Preset(name=name, user_id=current_user, styles=styles)
         db.session.add(new_preset)
         db.session.commit()
-        return jsonify({'id': new_preset.id, 'name': new_preset.name, 'styles': new_preset.get_styles()}), 201
+        return jsonify({'id': new_preset.id, 'name': new_preset.name, 'styles': new_preset.styles}), 201
         
     except Exception as e:
         return jsonify({'error': e})
