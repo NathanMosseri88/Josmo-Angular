@@ -8,7 +8,8 @@ presets_bp = Blueprint('presets', __name__)
 @presets_bp.route('/presets', methods=['GET'])
 @jwt_required()
 def get_presets():
-    presets = Preset.query.all()
+    current_user = get_jwt_identity()
+    presets = Preset.query.filter_by(user_id=current_user).all()
     results = [{"id": preset.id, "name": preset.name, "styles": preset.get_styles()} for preset in presets]
     return jsonify(results), 200
    
