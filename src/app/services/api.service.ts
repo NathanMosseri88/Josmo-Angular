@@ -19,6 +19,16 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/login`, data)
   }
 
+  signup(data:any, token:string): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    }
+    return this.http.post<any>(`${this.apiUrl}/signup`, data, httpOptions)
+  }
+
   getPresets(token:string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({

@@ -8,7 +8,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     # admin column to allow manually assigned admins to create users (and maybe other abilities down the line) -- defaults to false
-    # admin = db.Column(db.Boolean, default=False, nullable=False)
+    admin = db.Column(db.Boolean, default=False, nullable=False)
     # user has many presets -- sets up relationship to presets
     presets = db.relationship('Preset', backref='user', lazy=True)
 

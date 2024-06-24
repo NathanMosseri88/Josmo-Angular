@@ -6,6 +6,7 @@ import {MatCardModule} from '@angular/material/card'
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-signup',
@@ -26,14 +27,31 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class SignupComponent {
 
   signupFormData: FormGroup
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private apiService:ApiService) {
     this.signupFormData = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
   
   handleSubmit(e:any){
-    this.signupFormData.reset()
+    console.log(this.signupFormData)
+    let token = sessionStorage.getItem('user') 
+    if(!token){
+      alert('Please log in')
+      return
+    }
+    this.apiService.signup(this.signupFormData.value, token).subscribe(
+      res => { 
+        console.log(res)
+        this.signupFormData.reset() 
+        alert(`User created with username: ${res.username}`)
+      },
+      error => {
+        console.log(error)
+        alert(error.error.error)
+      }
+    )
   }
 }
