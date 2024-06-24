@@ -1,8 +1,12 @@
 # Josmo
 
+Root project directory commands:
 To start up the flask dev server run "python -m backend.app" from the parent directory
+download npm packages: npm i
+start up angular dev server: ng serve
 
-
+Flask app is in the 'backend' directory
+navigate to ./backend to install flask dependencies and activate venv
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
