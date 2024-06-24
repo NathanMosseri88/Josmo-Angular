@@ -1,5 +1,8 @@
 # Josmo
 
+python version: 3.12.3
+node version: 20.12.2
+
 Root project directory commands:
 To start up the flask dev server run "python -m backend.app" from the parent directory
 download npm packages: npm i
