@@ -30,6 +30,9 @@ import { ApiService } from '../services/api.service';
 export class LoginComponent {
 
   loginFormData: FormGroup
+  // initializes the API services to send requests to the flask API
+  // initializes Angular reactive forms form group to gather form data from inputs 
+  // initializes routing to navigate users to different pages
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private router: Router) {
     this.loginFormData = this.formBuilder.group({
       username: ['', Validators.required],
@@ -38,12 +41,12 @@ export class LoginComponent {
   }
 
   handleSubmit(e:any){
-    this.apiService.login(this.loginFormData.value).subscribe(
-      res => {
+    this.apiService.login(this.loginFormData.value).subscribe( // sends authorization post request to flask API's user endpoint
+      res => { // credentials match and user authorized
         console.log(res)
-        sessionStorage.setItem('user', res.access_token)
-        this.loginFormData.reset()
-        this.router.navigate(['/proposal-form'])
+        sessionStorage.setItem('user', res.access_token) // store user's auth token in browser's session storage
+        this.loginFormData.reset() // reset login form data
+        this.router.navigate(['/proposal-form']) // send user to proposal form page
       },
       error => {
         console.log(error)

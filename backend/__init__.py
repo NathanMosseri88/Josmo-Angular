@@ -11,6 +11,7 @@ def create_app():
     # Configure database
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Simple123@localhost/Josmo_db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # for security reasons this should be changed and stored differently 
     app.config['JWT_SECRET_KEY'] = 'f5bdd9ca0349ad5fc9601f228d97777d8104c38f0025ba6de590e21b0c6e0166'
 
     # Initialize database
@@ -27,8 +28,10 @@ def create_app():
     app.register_blueprint(users_bp, url_prefix='/api')
     app.register_blueprint(proposals_bp, url_prefix='/api')
 
+    # only allows incoming requests from the following domain(s) to access the API's endpoints
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:4200"}})
 
+    # allows 'flask shell' to have access to the DB and model methods on start up 
     @app.shell_context_processor
     def make_shell_context():
         return {'db': db, 'User': User, 'Preset': Preset, 'Proposal': Proposal}

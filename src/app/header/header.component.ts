@@ -32,8 +32,10 @@ export class HeaderComponent {
     this.sidenav.toggleSideBar()
   }
 
-  handleLogout(){
+  handleLogout(){ // triggered when clicking 'Log Out' button 
+    // removes user's auth token from browser's session storage
     sessionStorage.removeItem('user')
+    // sends user back to login page
     this.router.navigate(['/login'])
   }
 

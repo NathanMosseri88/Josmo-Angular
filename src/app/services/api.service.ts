@@ -11,19 +11,6 @@ import { Token } from '@angular/compiler';
 
 export class ApiService {
 
-  // token = localStorage.getItem('user') ? localStorage.getItem('user') : null
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     Authorization: `Bearer ${this.token}`
-  //   })
-  // }
-  // httpPost = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${this.token}`
-  //   })
-  // }
-
   private apiUrl = 'http://localhost:5000/api'
 
   constructor(private http: HttpClient) { }

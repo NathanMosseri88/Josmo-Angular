@@ -1,6 +1,5 @@
 <div id="form-container">
     <form [formGroup]="formData" (ngSubmit)="handleSubmit($event)" (keydown.enter)="$event.preventDefault()" class="form-flex-container">
-        
         <mat-card class="form-card; styles-card">
             <mat-card-header class="form-card-top">
                 <h2>Styles</h2>
@@ -26,7 +25,6 @@
                     <button  id="style-preset-button" (click)="handleSavePreset(); false">Save Styles Preset</button>
                     <app-preset-options (presetSelected)="handlePresetSelection($event)"></app-preset-options>
                 </div>
-                <!-- <app-preset-options></app-preset-options> -->
             </mat-card-footer>
         </mat-card>
 

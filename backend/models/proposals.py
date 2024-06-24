@@ -2,6 +2,7 @@ from . import db
 import json
 
 class Proposal(db.Model):
+    # initializes DB columns 
     id = db.Column(db.Integer, primary_key=True)
     run_type = db.Column(db.String(100), nullable=True)
     view_by = db.Column(db.String(100), nullable=True)
@@ -13,7 +14,7 @@ class Proposal(db.Model):
     styles = db.Column(db.JSON, nullable=False)
     
     @property
-    def serizalize(self):
+    def serizalize(self):  # fromat to send requested proposal data to client
         return {
             'id': self.id,
             'run_type': self.run_type,
