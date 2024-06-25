@@ -4,9 +4,9 @@ import { MatSelect } from '@angular/material/select';
 import  {MatIcon} from '@angular/material/icon'
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { PresetOptionsComponent } from '../preset-options/preset-options.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbar } from '@angular/material/toolbar';
+import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +18,10 @@ import { MatToolbar } from '@angular/material/toolbar';
     MatIcon,
     PresetOptionsComponent,
     MatButtonModule,
-    MatToolbar
+    MatToolbar,
+    MatToolbarRow,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
