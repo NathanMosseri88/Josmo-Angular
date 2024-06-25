@@ -37,7 +37,7 @@ export class ProposalFormComponent {
   @ViewChild(PresetOptionsComponent) presetOptionsComponent!: PresetOptionsComponent
 
   // hard coded options for form dropdowns -- should probably be changed later
-  runTypes = ['Size Run']
+  runTypes = ['Size Run', 'No Size Run']
   viewBy = ['UPC', 'Size']
   pairsCases = ['Pairs', 'Cases']
   includeColumns = ['Price', 'Cost', 'Landed', 'In Stock', 'ATS', 'Incoming', 'Brand', 'Descript', 'Note']
@@ -55,13 +55,13 @@ export class ProposalFormComponent {
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.formData = this.formBuilder.group({
       type: ['', Validators.nullValidator],
-      view: ['', Validators.required],
-      pairs_cases: ['', Validators.required],
-      columns: [[], Validators.required],
-      filters: ['', Validators.required],
-      status: ['', Validators.required],
-      filename: ['', Validators.required],
-      styles: [[], Validators.required],
+      view: ['', Validators.nullValidator],
+      pairs_cases: ['', Validators.nullValidator],
+      columns: [[], Validators.nullValidator],
+      filters: ['', Validators.nullValidator],
+      status: ['', Validators.nullValidator],
+      filename: ['', Validators.nullValidator],
+      styles: [[], Validators.nullValidator],
       quantityLess: [null, Validators.nullValidator],
       quantityGreater: [null, Validators.nullValidator],
     });

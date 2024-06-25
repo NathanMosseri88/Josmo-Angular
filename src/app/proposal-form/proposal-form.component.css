@@ -143,3 +143,7 @@ tfoot tr{
     width: 100%;
     text-align: center;
 }
+
+#preset-options-container {
+    text-align: center;
+}

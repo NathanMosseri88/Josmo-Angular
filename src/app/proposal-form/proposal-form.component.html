@@ -23,6 +23,8 @@
                 <div id="preset-container">
                     <input matInput #presetName placeholder="Save Preset As..." (input)="handlePresetInput(presetName.value)" value="{{stylesForPreset.name}}"/>
                     <button  id="style-preset-button" (click)="handleSavePreset(); false">Save Styles Preset</button>
+                </div>
+                <div id="preset-options-container">
                     <app-preset-options (presetSelected)="handlePresetSelection($event)"></app-preset-options>
                 </div>
             </mat-card-footer>
@@ -35,31 +37,30 @@
             <mat-card-content>
                 <mat-form-field class="form-field">
                     <mat-label>Run Type</mat-label>
-                    <mat-select name="type" #type formControlName="type" placeholder="Run Type">
-                        <mat-option>None</mat-option>
+                    <mat-select name="type" #type formControlName="type" >
                         <mat-option *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label for="view">View By</mat-label>
-                    <mat-select name="view" #view formControlName="view" placeholder="View By">
-                        <mat-option>None</mat-option>
+                    <mat-select name="view" #view formControlName="view">
+                        
                         <mat-option *ngFor="let view of viewBy" id={{view}} value={{view}}>{{view}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label>Pairs/Cases</mat-label>
-                    <mat-select name="pairs_cases" #pC formControlName="pairs_cases" placeholder="Pairs/Cases">
-                        <mat-option>None</mat-option>
+                    <mat-select name="pairs_cases" #pC formControlName="pairs_cases" >
+                        
                         <mat-option *ngFor="let p of pairsCases" value={{p}}>{{p}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label>Include Columns</mat-label>
-                    <mat-select multiple name="columns" #columns formControlName="columns" placeholder="Include Columns">
+                    <mat-select multiple name="columns" #columns formControlName="columns" >
                         <mat-option *ngFor="let c of includeColumns" value={{c}}>{{c}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -68,8 +69,8 @@
         
                 <mat-form-field class="form-field">
                     <mat-label>Stock Filters</mat-label>
-                    <mat-select name="filters" #filter formControlName="filters" placeholder="Stock Filters">
-                        <mat-option>None</mat-option>
+                    <mat-select name="filters" #filter formControlName="filters" >
+                        
                         <mat-option *ngFor="let f of stockFilters" name="filters" value={{f}}>{{f}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -89,8 +90,8 @@
                 <!-- <br/> -->
                 <mat-form-field class="form-field">
                     <mat-label>Status</mat-label>
-                    <mat-select name="status" #status formControlName="status" placeholder="Status">
-                        <mat-option>None</mat-option>
+                    <mat-select name="status" #status formControlName="status" >
+                        
                         <mat-option *ngFor="let s of statuses" value={{s}}>{{s}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -99,7 +100,7 @@
             <mat-card-footer class="form-card-bottom">
                 <mat-form-field class="form-field filename-field">
                     <mat-label>Save File As:</mat-label>
-                    <input name="filename" matInput #filename formControlName="filename" placeholder="File Name"/>
+                    <input name="filename" matInput #filename formControlName="filename" />
                 </mat-form-field>
                 <button id="cancel-button" mat-raised-button type="button" (click)="handleCancel()">Clear</button>
                 <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
