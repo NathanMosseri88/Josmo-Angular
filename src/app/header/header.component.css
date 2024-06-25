@@ -64,12 +64,12 @@
   cursor: pointer;
 }
 
-#logout-button {
+.logout-button {
   font-size: smaller;
   padding: 2%;
   color: white;
   margin-left: auto;
 }
-#logout-button:hover {
+.logout-button:hover {
   cursor: pointer;
 }

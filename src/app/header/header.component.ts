@@ -7,11 +7,14 @@ import { PresetOptionsComponent } from '../preset-options/preset-options.compone
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { AuthService } from '../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
+    CommonModule,
     MatFormField,
     MatSelect,
     SidenavComponent,
@@ -21,7 +24,7 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
     MatToolbar,
     MatToolbarRow,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -29,7 +32,7 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 
 export class HeaderComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService:AuthService) {}
 
   @ViewChild(SidenavComponent) sidenav!: SidenavComponent
   
@@ -42,6 +45,14 @@ export class HeaderComponent {
     sessionStorage.removeItem('user')
     // sends user back to login page
     this.router.navigate(['/login'])
+  }
+
+  handleLoginButton(){
+    this.router.navigate(['/login'])
+  }
+
+  isLoggedIn():boolean {
+    return this.authService.isLoggedIn()
   }
 
 }

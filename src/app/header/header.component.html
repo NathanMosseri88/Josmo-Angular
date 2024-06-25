@@ -11,9 +11,20 @@
 
 <mat-toolbar id="header-toolbar">
   <mat-toolbar-row>
-    <span id="header-logo"><img routerLink="/" routerLinkActive="" src="../../assets/JOSMO_logo_100x75.png"/></span>
-    <span class="navlinks"><p routerLink="/proposal-form" routerLinkActive="">Proposal Form</p></span>
-    <span class="navlinks"><p routerLink="/styles-report">Styles Report</p></span>
-    <span id="logout-button" (click)="handleLogout()"><p>Log Out</p></span>
+    <span id="header-logo">
+      <img routerLink="/" routerLinkActive="" src="../../assets/JOSMO_logo_100x75.png"/>
+    </span>
+    <span class="navlinks" *ngIf="isLoggedIn()">
+      <p routerLink="/proposal-form" routerLinkActive="">Proposal Form</p>
+    </span>
+    <span class="navlinks" *ngIf="isLoggedIn()">
+      <p routerLink="/styles-report">Styles Report</p>
+    </span>
+    <span class="logout-button" (click)="handleLogout()" *ngIf="isLoggedIn()">
+      <p>Log Out</p>
+    </span>
+    <span class="logout-button" (click)="handleLoginButton()" *ngIf="!isLoggedIn()">
+      <p>Log In</p>
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
