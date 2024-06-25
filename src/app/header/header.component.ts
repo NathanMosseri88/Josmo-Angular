@@ -6,6 +6,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 import { PresetOptionsComponent } from '../preset-options/preset-options.component';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     SidenavComponent,
     MatIcon,
     PresetOptionsComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbar
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

@@ -42,4 +42,13 @@ testem.log
 Thumbs.db
 
 # backend files
-__pychache__/
+**/__pycache__
+**/__pycache__/
+
+*.ini
+**/__pycache__
+**/.idea
+**/venv
+
+
+
