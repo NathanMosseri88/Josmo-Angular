@@ -1,5 +1,16 @@
 # Josmo
 
+python version: 3.12.3
+node version: 20.12.2
+
+Root project directory commands:
+To start up the flask dev server run "python -m backend.app" from the parent directory
+download npm packages: npm i
+start up angular dev server: ng serve
+
+Flask app is in the 'backend' directory
+navigate to ./backend to install flask dependencies and activate venv
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
 ## Development server
@@ -25,3 +36,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
