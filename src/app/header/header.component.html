@@ -18,7 +18,10 @@
       <p routerLink="/proposal-form" routerLinkActive="">Proposal Form</p>
     </span>
     <span class="navlinks" *ngIf="isLoggedIn()">
-      <p routerLink="/styles-report">Styles Report</p>
+      <p routerLink="/styles-report" routerLinkActive="">Styles Report</p>
+    </span>
+    <span class="navlinks" *ngIf="isLoggedIn() && isAdmin()">
+      <p routerLink="/signup" routerLinkActive="">Creat Users</p>
     </span>
     <span class="logout-button" (click)="handleLogout()" *ngIf="isLoggedIn()">
       <p>Log Out</p>
