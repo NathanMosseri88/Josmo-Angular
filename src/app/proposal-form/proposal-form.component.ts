@@ -35,7 +35,7 @@ import { SchedulerComponent } from '../scheduler/scheduler.component';
     MatButtonModule,
     MatTableModule,
     PresetOptionsComponent,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './proposal-form.component.html',
@@ -50,7 +50,7 @@ export class ProposalFormComponent {
   viewBy = ['UPC', 'Size']
   pairsCases = ['Pairs', 'Cases']
   includeColumns = ['Price', 'Cost', 'Landed', 'In Stock', 'ATS', 'Incoming', 'Brand', 'Descript', 'Note']
-  stockFilters = ['In Stock Only', 'Include 0 Quantities']
+  stockFilters = ['In Stock Only', 'Include 0 Quantities', 'Include Negative Quantities']
   statuses = ['Active']
 
   stylesForPreset:any = {name: '', styles: []}
@@ -105,6 +105,7 @@ export class ProposalFormComponent {
 
   handleProposalClear(){ // clears formData -  not including styles 
     this.formData.reset({type: 'Size Run', view: 'Size', pairs_cases: 'Pairs'})
+    this.allSelected = false
   }
   handleStylesClear(){
   this.rows = ['','','','','','','','','','','','','']
@@ -173,32 +174,48 @@ export class ProposalFormComponent {
     this.rows.splice(index, 1)
   }
 
-  handlePercentProfit():boolean{
-    if(this.formData.value.columns){
-      return !!this.formData.value.columns.includes('Price')
-    }
-    return false
-  }
-
+  
   openBottomSheet(): void {
     // this.bottomSheet.open(SchedulerComponent)
-    const dialogRef = this.dialog.open(SchedulerComponent, {
+    this.dialog.open(SchedulerComponent, {
       width: '50%',
       height: '50%'
     })
     
   }
 
-  upcDisableInputs(viewByValue:any):boolean {
-    if(viewByValue === 'UPC'){
-      this.formData.value.type = ''
-      this.formData.value.pairs_cases = ''
-      this.formData.value.start_date = ''
-      this.formData.value.end_date = ''
-      return true
+  allSelected = false
+  columnsSelected(e:any){
+    console.log(e.value)
+    if(e.value.includes('select all')){
+      this.allSelected = true
+      this.formData.value.columns = this.includeColumns
+    } else {
+      this.allSelected = false
+      this.formData.value.columns = []
     }
-    return false
+    console.log(this.formData.value)
   }
+
+  // handlePercentProfit():boolean{
+  //   console.log(e)
+  //   if(this.formData.value.columns){
+  //     return !!this.formData.value.columns.includes('Price')
+  //   }
+  //   return false
+  // }
+
+  // upcDisableInputs(viewByValue:any):boolean {
+  //   console.log('checking')
+  //   if(viewByValue === 'UPC'){
+  //     // this.formData.value.type = ''
+  //     // this.formData.value.pairs_cases = ''
+  //     // this.formData.value.start_date = ''
+  //     // this.formData.value.end_date = ''
+  //     return true
+  //   }
+  //   return false
+  // }
 
 
 }

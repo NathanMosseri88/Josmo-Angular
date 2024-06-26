@@ -49,42 +49,44 @@
                 <mat-form-field class="form-field">
                     <mat-label>Run Type</mat-label>
                     <mat-select name="type" #type formControlName="type">
-                        <mat-option [disabled]="upcDisableInputs(view.value)" *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
+                        <mat-option [disabled]="view.value === 'UPC'" *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label>Pairs/Cases</mat-label>
                     <mat-select name="pairs_cases" #pC formControlName="pairs_cases" >
-                        <mat-option *ngFor="let p of pairsCases" value={{p}} [disabled]="upcDisableInputs(view.value)">{{p}}</mat-option>
+                        <mat-option *ngFor="let p of pairsCases" value={{p}} [disabled]="view.value === 'UPC'">{{p}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label>Include Columns</mat-label>
-                    <mat-select multiple name="columns" #columns formControlName="columns" >
+                    <mat-select multiple name="columns" #columns formControlName="columns" (selectionChange)="columnsSelected($event)" [value]="formData.value.columns">
+                        <mat-option *ngIf="!allSelected === true else deselect" value="select all">Select All</mat-option>
+                        <ng-template #deselect><mat-option value="deselect all">Deselect All</mat-option></ng-template>
                         <mat-option *ngFor="let c of includeColumns" value={{c}}>{{c}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <!-- <br> -->
 
-                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                <mat-form-field class="form-field" *ngIf="columns.value && columns.value.includes('Price')">
                     <mat-label>%Profit</mat-label>
                     <input matInput type="number" formControlName="percent_profit"/>
                 </mat-form-field>
 
-                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                <mat-form-field class="form-field" *ngIf="columns.value && columns.value.includes('Price')">
                     <mat-label>Price >=</mat-label>
                     <input matInput type="number" formControlName="priceGreater" />
                 </mat-form-field>
 
-                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                <mat-form-field class="form-field" *ngIf="columns.value && columns.value.includes('Price')">
                     <mat-label>Price <=</mat-label>
                     <input matInput type="number" formControlName="priceLess" />
                 </mat-form-field>
 
-                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                <mat-form-field class="form-field" *ngIf="columns.value && columns.value.includes('Price')">
                     <mat-label>Set Price</mat-label>
                     <input matInput type="number" formControlName="set_price"/>
                 </mat-form-field>
@@ -121,7 +123,7 @@
 
                 <mat-form-field class="form-field">
                     <mat-label>Inventory Date Range</mat-label>
-                    <mat-date-range-input [rangePicker]="picker" [disabled]="upcDisableInputs(view.value)">
+                    <mat-date-range-input [rangePicker]="picker" [disabled]="view.value === 'UPC'">
                         <input matStartDate formControlName="start_date" placeholder="Start date">
                         <input matEndDate formControlName="end_date" placeholder="End date">
                     </mat-date-range-input>
