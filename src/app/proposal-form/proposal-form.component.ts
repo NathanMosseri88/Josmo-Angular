@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
@@ -27,8 +29,10 @@ import { PresetOptionsComponent } from '../preset-options/preset-options.compone
     MatCardModule,
     MatButtonModule,
     MatTableModule,
-    PresetOptionsComponent
+    PresetOptionsComponent,
+    MatDatepickerModule
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './proposal-form.component.html',
   styleUrl: './proposal-form.component.css'
 })
@@ -66,6 +70,9 @@ export class ProposalFormComponent {
       styles: [[], Validators.nullValidator],
       quantityLess: [null, Validators.nullValidator],
       quantityGreater: [null, Validators.nullValidator],
+      priceGreater: [null, Validators.nullValidator],
+      priceLess: [null, Validators.nullValidator],
+      set_price: [null, Validators.nullValidator]
     });
   }
 
@@ -95,7 +102,7 @@ export class ProposalFormComponent {
     // this.stylesForPreset.name = ''
   }
   handleStylesClear(){
-    this.rows = []
+    this.rows = ['','','','','','','','','','','','',]
     this.stylesForPreset.name = ''
   }
 
@@ -154,7 +161,7 @@ export class ProposalFormComponent {
   }
 
   handlePresetSelection(selectedStyles: string[]){ // triggered when a saved preset is selected -- uses method in preset-options component
-    this.rows.push(...selectedStyles) // adds styles from saved preset to rows array 
+    this.rows= selectedStyles // adds styles from saved preset to rows array 
   }
 
   deleteRow(index:any){

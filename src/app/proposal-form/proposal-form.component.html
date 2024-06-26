@@ -96,6 +96,26 @@
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
+                    <mat-label>Price >=</mat-label>
+                    <input matInput type="number" formControlName="priceGreater" />
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Price <=</mat-label>
+                    <input matInput type="number" formControlName="priceLess" />
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Set Price</mat-label>
+                    <input matInput type="number" formControlName="set_price"/>
+                </mat-form-field>
+
+                <mat-date-range-input>
+                    <input matStartDate placeholder="Start Date"/>
+                    <input matEndDate placeholder="End Date" />
+                </mat-date-range-input>
+
+                <mat-form-field class="form-field">
                     <mat-label>Status</mat-label>
                     <mat-select name="status" #status formControlName="status" >
                         <mat-option>---</mat-option>
