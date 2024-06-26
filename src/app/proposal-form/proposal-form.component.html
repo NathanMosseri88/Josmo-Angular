@@ -9,6 +9,7 @@
                     <tbody class="table-body">
                         <tr *ngFor="let row of rows; let i = index">
                             <td>
+                                <button class="delete-row" (click)="deleteRow(i); false">X</button>
                                 <input class="table-input" #styles value={{row}} placeholder="Input Style ID" (change)="handleStylesInput(styles.value, i)" />
                             </td>
                         </tr>
@@ -19,6 +20,7 @@
                 <div id="button-container">
                     <button class="table-button" mat-raised-button (click)="addRow(); false">Add Row</button>
                     <button class="table-button" mat-raised-button (click)="handlePaste(); false">Paste</button>
+                    <button class="table-button" id="table-clear" mat-raised-button (click)="handleStylesClear(); false">Clear</button>
                 </div>
                 <div id="preset-container">
                     <input matInput #presetName placeholder="Save Preset As..." (input)="handlePresetInput(presetName.value)" value="{{stylesForPreset.name}}"/>
@@ -65,33 +67,34 @@
                     </mat-select>
                 </mat-form-field>
 
+                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                    <mat-label>%Profit</mat-label>
+                    <input matInput type="number" formControlName="percent_profit"/>
+                </mat-form-field>
+
                 <br/>
         
                 <mat-form-field class="form-field">
                     <mat-label>Stock Filters</mat-label>
                     <mat-select name="filters" #filter formControlName="filters" >
-                        
                         <mat-option *ngFor="let f of stockFilters" name="filters" value={{f}}>{{f}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                
-                    <!-- <ng-template #quantInputs> -->
-                        <mat-form-field class="form-field"  >
-                            <mat-label>Quantity <=</mat-label>
-                            <input name="quantity" matInput type="number" formControlName="quantityLess"/>
-                        </mat-form-field>
-        
-                        <mat-form-field class="form-field" >
-                            <mat-label>Quantity >=</mat-label>
-                            <input name="quantity" matInput type="number" formControlName="quantityGreater"/>
-                        </mat-form-field>
-                    <!-- </ng-template> -->
-                
-                <!-- <br/> -->
+
+                <mat-form-field class="form-field"  >
+                    <mat-label>Quantity >=</mat-label>
+                    <input name="quantity" matInput type="number" formControlName="quantityGreater"/>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" >
+                    <mat-label>Quantity <=</mat-label>
+                    <input name="quantity" matInput type="number" formControlName="quantityLess"/>
+                </mat-form-field>
+
                 <mat-form-field class="form-field">
                     <mat-label>Status</mat-label>
                     <mat-select name="status" #status formControlName="status" >
-                        
+                        <mat-option>---</mat-option>
                         <mat-option *ngFor="let s of statuses" value={{s}}>{{s}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -102,7 +105,7 @@
                     <mat-label>Save File As:</mat-label>
                     <input name="filename" matInput #filename formControlName="filename" />
                 </mat-form-field>
-                <button id="cancel-button" mat-raised-button type="button" (click)="handleCancel()">Clear</button>
+                <button id="cancel-button" mat-raised-button type="button" (click)="handleProposalClear()">Clear</button>
                 <button id="submit-button" mat-raised-button type="submit" (click)="handleSubmit($event); false">Submit</button>
             </mat-card-footer>
         </mat-card>

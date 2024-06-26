@@ -58,9 +58,10 @@ export class ProposalFormComponent {
       view: ['', Validators.nullValidator],
       pairs_cases: ['', Validators.nullValidator],
       columns: [[], Validators.nullValidator],
+      percent_profit: [null, Validators.nullValidator],
       filters: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],
-      filename: ['', Validators.nullValidator],
+      filename: ['', Validators.required],
       styles: [[], Validators.nullValidator],
       quantityLess: [null, Validators.nullValidator],
       quantityGreater: [null, Validators.nullValidator],
@@ -87,8 +88,12 @@ export class ProposalFormComponent {
     )
   }
 
-  handleCancel(){ // clears formData and styles table when 'cancel' button is clicked 
+  handleProposalClear(){ // clears formData -  not including styles 
     this.formData.reset()
+    // this.rows = []
+    // this.stylesForPreset.name = ''
+  }
+  handleStylesClear(){
     this.rows = []
     this.stylesForPreset.name = ''
   }
@@ -149,6 +154,15 @@ export class ProposalFormComponent {
 
   handlePresetSelection(selectedStyles: string[]){ // triggered when a saved preset is selected -- uses method in preset-options component
     this.rows.push(...selectedStyles) // adds styles from saved preset to rows array 
+  }
+
+  deleteRow(index:any){
+    console.log(index)
+    this.rows.splice(index, 1)
+  }
+
+  handlePercentProfit():boolean{
+    return !!this.formData.value.columns.includes('Price')
   }
 
 

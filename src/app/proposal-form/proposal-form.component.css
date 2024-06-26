@@ -113,16 +113,25 @@ th, td {
 }
 
 .table-input {
-    width: 100%;
+    width: 50%;
     border: 0;
     text-align: center;
 }
 
+.delete-row {
+    background-color: white;
+    border: .5px solid grey;
+}
+
 .table-button {
-    width: 50%;
+    width: 33.33%;
     background-color: white;
     color: black;
     border: 1px inset black;
+}
+
+#table-clear:hover {
+    box-shadow: 0px 0px 5vh rgb(218, 109, 109);
 }
 
 .table-button:hover {
@@ -132,7 +141,6 @@ th, td {
 tfoot tr{
     position: sticky;
     bottom: 0;
-    
 }
 
 #button-container {

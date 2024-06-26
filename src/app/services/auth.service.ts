@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  admin = new BehaviorSubject<boolean>(true)
+  admin = new BehaviorSubject<boolean>(false)
 
   constructor() { }
 
@@ -14,7 +14,6 @@ export class AuthService {
   }
 
   isAdmin():Observable<boolean> {
-    let token = sessionStorage.getItem('admin')
     return this.admin.asObservable()
   }
 
