@@ -48,7 +48,7 @@ export class ProposalFormComponent {
 
   formData: FormGroup
 
-  rows: string[] = []; // represent rows in the styles table form 
+  rows: string[] = ['','','','','','','','','','','',]; // represent rows in the styles table form 
 
   // initializes the API services to send requests to the flask API
   // initializes Angular reactive forms form group to gather form data from inputs
@@ -59,6 +59,7 @@ export class ProposalFormComponent {
       pairs_cases: ['', Validators.nullValidator],
       columns: [[], Validators.nullValidator],
       percent_profit: [null, Validators.nullValidator],
+      price_limit: [null, Validators.nullValidator],
       filters: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],
       filename: ['', Validators.required],
@@ -162,7 +163,10 @@ export class ProposalFormComponent {
   }
 
   handlePercentProfit():boolean{
-    return !!this.formData.value.columns.includes('Price')
+    if(this.formData.value.columns){
+      return !!this.formData.value.columns.includes('Price')
+    }
+    return false
   }
 
 

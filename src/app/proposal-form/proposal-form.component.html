@@ -71,6 +71,10 @@
                     <mat-label>%Profit</mat-label>
                     <input matInput type="number" formControlName="percent_profit"/>
                 </mat-form-field>
+                <mat-form-field class="form-field" *ngIf="handlePercentProfit()">
+                    <mat-label>Price Limit</mat-label>
+                    <input matInput type="number" formControlName="price_limit"/>
+                </mat-form-field>
 
                 <br/>
         
