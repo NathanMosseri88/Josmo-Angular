@@ -1,0 +1,103 @@
+<div id="scheduler-header">
+    <h2>Scheduler</h2>
+</div>
+
+<div id="scheduler-container">
+    <mat-form-field class="scheduler-input">
+        <mat-label>Start Time</mat-label>
+        <input matInput type="time"/>
+    </mat-form-field>
+    
+    <mat-form-field class="scheduler-input">
+        <mat-label>Frequency</mat-label>
+        <mat-select #frequency >
+            <mat-option value="once daily">Once a Day</mat-option>
+            <mat-option value="twice daily">Twice a Day</mat-option>
+            <mat-option value="once weekly">Once a Week</mat-option>
+            <mat-option value="twice weekly">Twice a Week</mat-option>
+            <mat-option value="once monthly">Once a Month</mat-option>
+            <mat-option value="twice monthly">Twice a Month</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <div *ngIf="frequency.value === 'twice daily' ">
+        <mat-form-field class="scheduler-input" >
+            <mat-label>Time 1</mat-label>
+            <input matInput type="time" />
+        </mat-form-field>
+        <mat-form-field class="scheduler-input">
+            <mat-label>Time 2</mat-label>
+            <input matInput type="time"/>
+        </mat-form-field>
+    </div>
+    
+    <div *ngIf="frequency.value === 'once weekly' ">
+        <mat-form-field class="scheduler-input">
+            <mat-label>Pick a Day</mat-label>
+            <mat-select>
+                <mat-option value="sunday">Sunday</mat-option>
+                <mat-option value="monday">Monday</mat-option>
+                <mat-option value="tuesday">Tuesday</mat-option>
+                <mat-option value="wednesday">Wednesday</mat-option>
+                <mat-option value="thursday">Thursday</mat-option>
+                <mat-option value="friday">Friday</mat-option>
+                <mat-option value="saturday">Saturday</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+    <div *ngIf="frequency.value === 'twice weekly' ">
+        <mat-form-field class="scheduler-input">
+            <mat-label>Day 1</mat-label>
+            <mat-select #day1>
+                <mat-option value="sunday">Sunday</mat-option>
+                <mat-option value="monday">Monday</mat-option>
+                <mat-option value="tuesday">Tuesday</mat-option>
+                <mat-option value="wednesday">Wednesday</mat-option>
+                <mat-option value="thursday">Thursday</mat-option>
+                <mat-option value="friday">Friday</mat-option>
+                <mat-option value="saturday">Saturday</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="scheduler-input">
+            <mat-label>Day 2</mat-label>
+            <mat-select>
+                <mat-option value="sunday">Sunday</mat-option>
+                <mat-option value="monday">Monday</mat-option>
+                <mat-option value="tuesday">Tuesday</mat-option>
+                <mat-option value="wednesday">Wednesday</mat-option>
+                <mat-option value="thursday">Thursday</mat-option>
+                <mat-option value="friday">Friday</mat-option>
+                <mat-option value="saturday">Saturday</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+    <div *ngIf="frequency.value === 'once monthly' ">
+        <mat-form-field class="scheduler-input">
+            <mat-label>Pick a Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="frequency.value === 'twice monthly' ">
+        <mat-form-field class="scheduler-input">
+            <mat-label>Date 1</mat-label>
+            <input matInput [matDatepicker]="picker1">
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="scheduler-input">
+            <mat-label>Date 2</mat-label>
+            <input matInput [matDatepicker]="picker2">
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div id="submit-container">
+        <button mat-raised-button>Submit</button>
+    </div>
+</div>

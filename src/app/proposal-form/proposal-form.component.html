@@ -34,30 +34,29 @@
 
         <mat-card class="form-card">
             <mat-card-header class="form-card-top">
-                <h2>Proposal Form</h2>
+                <h2 id="header-title">Proposal Form</h2>                
+                <button mat-raised-button id="schedule-button" (click)="openBottomSheet(); false">Schedule</button>
             </mat-card-header>
             <mat-card-content>
                 
                 <mat-form-field class="form-field">
                     <mat-label for="view">View By</mat-label>
                     <mat-select name="view" #view formControlName="view">
-                        
                         <mat-option *ngFor="let view of viewBy" id={{view}} value={{view}}>{{view}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
                 <mat-form-field class="form-field">
                     <mat-label>Run Type</mat-label>
-                    <mat-select name="type" #type formControlName="type" >
-                        <mat-option *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
+                    <mat-select name="type" #type formControlName="type">
+                        <mat-option [disabled]="upcDisableInputs(view.value)" *ngFor="let type of runTypes" value={{type}}>{{type}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="form-field">
                     <mat-label>Pairs/Cases</mat-label>
                     <mat-select name="pairs_cases" #pC formControlName="pairs_cases" >
-                        
-                        <mat-option *ngFor="let p of pairsCases" value={{p}}>{{p}}</mat-option>
+                        <mat-option *ngFor="let p of pairsCases" value={{p}} [disabled]="upcDisableInputs(view.value)">{{p}}</mat-option>
                     </mat-select>
                 </mat-form-field>
 
@@ -95,6 +94,7 @@
                 <mat-form-field class="form-field">
                     <mat-label>Stock Filters</mat-label>
                     <mat-select name="filters" #filter formControlName="filters" >
+                        <mat-option>---</mat-option>
                         <mat-option *ngFor="let f of stockFilters" name="filters" value={{f}}>{{f}}</mat-option>
                     </mat-select>
                 </mat-form-field>

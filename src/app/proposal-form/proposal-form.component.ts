@@ -13,6 +13,9 @@ import {MatButtonModule} from '@angular/material/button'
 import { ApiService } from '../services/api.service';
 import { MatTableModule } from '@angular/material/table';
 import { PresetOptionsComponent } from '../preset-options/preset-options.component';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog'
+import { SchedulerComponent } from '../scheduler/scheduler.component';
 
 @Component({
   selector: 'app-proposal-form',
@@ -54,11 +57,11 @@ export class ProposalFormComponent {
 
   formData: FormGroup
 
-  rows: string[] = ['','','','','','','','','','','',]; // represent rows in the styles table form 
+  rows: string[] = ['','','','','','','','','','','','','']; // represent rows in the styles table form 
 
   // initializes the API services to send requests to the flask API
   // initializes Angular reactive forms form group to gather form data from inputs
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private bottomSheet:MatBottomSheet, public dialog:MatDialog) {
     this.formData = this.formBuilder.group({
       type: ['', Validators.nullValidator],
       view: ['', Validators.nullValidator],
@@ -106,7 +109,7 @@ export class ProposalFormComponent {
     // this.stylesForPreset.name = ''
   }
   handleStylesClear(){
-    this.rows = ['','','','','','','','','','','','',]
+    this.rows = ['','','','','','','','','','','','','']
     this.stylesForPreset.name = ''
   }
 
@@ -165,7 +168,7 @@ export class ProposalFormComponent {
   }
 
   handlePresetSelection(selectedStyles: string[]){ // triggered when a saved preset is selected -- uses method in preset-options component
-    this.rows = selectedStyles.length > 0 ? selectedStyles : ['','','','','','','','','','','',] // adds styles from saved preset to rows array 
+    this.rows = selectedStyles.length > 0 ? selectedStyles : ['','','','','','','','','','','','',''] // adds styles from saved preset to rows array 
   }
 
   deleteRow(index:any){
@@ -175,6 +178,24 @@ export class ProposalFormComponent {
   handlePercentProfit():boolean{
     if(this.formData.value.columns){
       return !!this.formData.value.columns.includes('Price')
+    }
+    return false
+  }
+
+  openBottomSheet(): void {
+    // this.bottomSheet.open(SchedulerComponent)
+    const dialogRef = this.dialog.open(SchedulerComponent, {
+      width: '50%',
+      height: '50%'
+    })
+    
+  }
+
+  upcDisableInputs(viewBy:any):boolean {
+    if(viewBy === 'UPC'){
+      this.formData.value.type = ''
+      this.formData.value.pairs_cases = ''
+      return true
     }
     return false
   }

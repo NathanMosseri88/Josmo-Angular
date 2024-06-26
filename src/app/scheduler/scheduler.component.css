@@ -1,0 +1,17 @@
+#scheduler-header{
+    text-align: center;
+    border-bottom: 1px dotted black;
+}
+
+/* #scheduler-container {
+    text-align: center;
+} */
+
+.scheduler-input {
+    padding: 2%;
+    width: 45%;
+}
+
+#submit-container {
+    text-align: center;
+}
