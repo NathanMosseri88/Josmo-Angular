@@ -63,9 +63,9 @@ export class ProposalFormComponent {
   // initializes Angular reactive forms form group to gather form data from inputs
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private bottomSheet:MatBottomSheet, public dialog:MatDialog) {
     this.formData = this.formBuilder.group({
-      type: ['', Validators.nullValidator],
-      view: ['', Validators.nullValidator],
-      pairs_cases: ['', Validators.nullValidator],
+      type: ['Size Run', Validators.nullValidator],
+      view: ['Size', Validators.nullValidator],
+      pairs_cases: ['Pairs', Validators.nullValidator],
       columns: [[], Validators.nullValidator],
       percent_profit: [null, Validators.nullValidator],
       price_limit: [null, Validators.nullValidator],
@@ -104,7 +104,7 @@ export class ProposalFormComponent {
   }
 
   handleProposalClear(){ // clears formData -  not including styles 
-    this.formData.reset()
+    this.formData.reset({type: 'Size Run', view: 'Size', pairs_cases: 'Pairs'})
   }
   handleStylesClear(){
   this.rows = ['','','','','','','','','','','','','']

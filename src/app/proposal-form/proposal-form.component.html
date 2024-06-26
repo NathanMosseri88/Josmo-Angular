@@ -41,7 +41,7 @@
                 
                 <mat-form-field class="form-field">
                     <mat-label for="view">View By</mat-label>
-                    <mat-select name="view" #view formControlName="view">
+                    <mat-select name="view" #view formControlName="view" >
                         <mat-option *ngFor="let view of viewBy" id={{view}} value={{view}}>{{view}}</mat-option>
                     </mat-select>
                 </mat-form-field>
