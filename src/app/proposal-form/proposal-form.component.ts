@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { MatInput } from '@angular/material/input';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'
@@ -20,10 +20,12 @@ import { PresetOptionsComponent } from '../preset-options/preset-options.compone
   imports: [
     CommonModule,
     MatFormField,
+    MatFormFieldModule,
     MatSelect,
     MatOption,
     MatLabel,
     MatInput,
+    MatInputModule,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatCardModule,
@@ -72,7 +74,9 @@ export class ProposalFormComponent {
       quantityGreater: [null, Validators.nullValidator],
       priceGreater: [null, Validators.nullValidator],
       priceLess: [null, Validators.nullValidator],
-      set_price: [null, Validators.nullValidator]
+      set_price: [null, Validators.nullValidator],
+      start_date: ['', Validators.nullValidator],
+      end_date: ['', Validators.nullValidator]
     });
   }
 
@@ -87,7 +91,6 @@ export class ProposalFormComponent {
     this.apiService.sendProposalForm(this.formData.value, token).subscribe( // post request to Flask API's proposals endpoint
       res => {
         console.log(res)
-        this.formData.reset() // clears the form data
       },
       error => {
         console.log(error)
@@ -97,6 +100,7 @@ export class ProposalFormComponent {
   }
 
   handleProposalClear(){ // clears formData -  not including styles 
+    console.log(this.formData.value)
     this.formData.reset()
     // this.rows = []
     // this.stylesForPreset.name = ''
@@ -161,11 +165,10 @@ export class ProposalFormComponent {
   }
 
   handlePresetSelection(selectedStyles: string[]){ // triggered when a saved preset is selected -- uses method in preset-options component
-    this.rows= selectedStyles // adds styles from saved preset to rows array 
+    this.rows = selectedStyles.length > 0 ? selectedStyles : ['','','','','','','','','','','',] // adds styles from saved preset to rows array 
   }
 
   deleteRow(index:any){
-    console.log(index)
     this.rows.splice(index, 1)
   }
 

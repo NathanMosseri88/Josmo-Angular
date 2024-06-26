@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ApiService } from '../services/api.service';
@@ -24,6 +24,10 @@ export class PresetOptionsComponent {
   @Output() presetSelected = new EventEmitter<string[]>()
 
   constructor(private apiService: ApiService){}
+
+  ngOnInit(): void {
+    this.populatePresets()
+  }
 
   populatePresets(){ // triggered when presets dropdown is opened for the first time in current session
     let token = sessionStorage.getItem('user') 
@@ -50,6 +54,9 @@ export class PresetOptionsComponent {
     if(e.value){
       // emit the selection as an array -- value is currently handled in the 'proposal-form' component
       this.presetSelected.emit(e.value.split(','))
+    }
+    else {
+      this.presetSelected.emit([])
     }
   }
 
