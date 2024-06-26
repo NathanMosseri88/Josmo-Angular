@@ -84,6 +84,7 @@ export class ProposalFormComponent {
   }
 
   handleSubmit(e:any){
+    console.log(this.formData.value)
     this.formData.value.styles = this.rows // sets the styles field in form data to the values of the rows of the styles table 
 
     let token = sessionStorage.getItem('user') // grab the users auth token from browser session storage
@@ -103,13 +104,10 @@ export class ProposalFormComponent {
   }
 
   handleProposalClear(){ // clears formData -  not including styles 
-    console.log(this.formData.value)
     this.formData.reset()
-    // this.rows = []
-    // this.stylesForPreset.name = ''
   }
   handleStylesClear(){
-    this.rows = ['','','','','','','','','','','','','']
+  this.rows = ['','','','','','','','','','','','','']
     this.stylesForPreset.name = ''
   }
 
@@ -191,10 +189,12 @@ export class ProposalFormComponent {
     
   }
 
-  upcDisableInputs(viewBy:any):boolean {
-    if(viewBy === 'UPC'){
+  upcDisableInputs(viewByValue:any):boolean {
+    if(viewByValue === 'UPC'){
       this.formData.value.type = ''
       this.formData.value.pairs_cases = ''
+      this.formData.value.start_date = ''
+      this.formData.value.end_date = ''
       return true
     }
     return false
